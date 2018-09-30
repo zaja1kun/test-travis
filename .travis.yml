@@ -5,8 +5,10 @@ install:
   - pip install -r requirements.txt
 script:
   - cd task1
-  - ./check_task1.sh
+  - nosetests .
+  - pylint .
   - cd -
   - cd pycalc
-  - ./check_pycalc.sh
+  - nosetests .
+  - pylint .
   - cd -

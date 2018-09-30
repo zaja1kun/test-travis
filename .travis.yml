@@ -4,11 +4,4 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - cd task1
-  - nosetests .
-  - pylint .
-  - cd -
-  - cd pycalc
-  - nosetests .
-  - pylint .
-  - cd -
+  - ./.travis_script.sh

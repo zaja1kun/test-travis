@@ -2,6 +2,7 @@ import sys
 import subprocess
 from math import *
 from distutils.util import strtobool
+from termcolor import colored
 
 
 PYCALC_UTIL_NAME = "pycalc"
@@ -89,8 +90,12 @@ ERROR_CASES = [
 ]
 
 
+PASS_TEMPLATE = "Test"
+FAIL_TEMPLATE = ""
+
+
 def trunc_string(string):
-    return (string[:15] + '..') if len(string) > 15 else string
+    return (string[:40] + '..') if len(string) > 40 else string
 
 
 def call_command(command, args):
@@ -108,19 +113,19 @@ def check_results(keys: dict):
             try:
                 converted_result = bool(strtobool(result[:-1]))
             except Exception:
-                print("{: <20} | Result: {}".format(
+                print("{: <45} | Result: {}".format(
                     command,
-                    "Fail: Invalid output: {} | Expected: {}".format(result, expected_result))
+                    "{}: Invalid output: {} | Expected: {}".format(colored("FAIL", "red"), result, expected_result))
                 )
                 RETURN_CODE = 1
                 continue
 
         if round(expected_result, 2) == round(converted_result, 2):
-            print("{: <20} | Result: {}".format(trunc_string(command), "Pass"))
+            print("{: <45} | Result: {}".format(trunc_string(command), colored("PASS", "green")))
         else:
-            print("{: <20} | Result: {}".format(
+            print("{: <45} | Result: {}".format(
                 command,
-                "Fail: Invalid output: {} | Expected: {}".format(result, expected_result))
+                "{}: Invalid output: {} | Expected: {}".format(colored("FAIL", "red"), result, expected_result))
             )
             RETURN_CODE = 1
 
@@ -130,9 +135,10 @@ def check_error_results(keys: list):
     for command in keys:
         result = call_command(PYCALC_UTIL_NAME, command)
         if result.startswith("ERROR:"):
-            print("{: <20} | Result: {}".format(trunc_string(command), "Pass"))
+            print("{: <45} | Result: {}".format(trunc_string(command), colored("PASS", "green")))
         else:
-            print("{: <20} | Result: {}".format(trunc_string(command), "Fail, expected correct error handling"))
+            print("{: <45} | Result: {}".format(trunc_string(command),
+                                                "{}, expected correct error handling".format(colored("FAIL", "red"))))
             RETURN_CODE = 1
 
 

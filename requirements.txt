@@ -2,3 +2,4 @@ nose
 pylint
 pycodestyle
 coverage
+termcolor

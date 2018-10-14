@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-cd task1
-nosetests .
-pylint .
-cd -
-cd pycalc
-nosetests .
-pylint .
-cd -

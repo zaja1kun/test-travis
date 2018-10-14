@@ -91,7 +91,7 @@ ERROR_CASES = [
 # OPTIONAL REQUIREMENTS
 IMPLICIT_MULTIPLICATION = {
     "10(2+1)": 10*(2+1),
-    "(1 + 2)(3 + 4)": (1 + 2) * (3 + 4)
+    "(1 + 2)(3 + 4)": (1 + 2) * (3 + 4),
     "epi": e * pi,
     "2sin(pi/2)": 2 * sin(pi/2),
     "2 sin(pi/2)": 2 * sin(pi/2),

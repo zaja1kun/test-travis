@@ -108,7 +108,7 @@ def trunc_string(string):
 
 
 def call_command(command, positional_params, optional_params=""):
-    params = [command, "--", positional_params] if optional_params else [command, optional_params, "--", positional_params]
+    params = [command, "--", positional_params] if not optional_params else [command, optional_params, " -- ", positional_params]
     result = subprocess.run(params, stdout=subprocess.PIPE)
     return result.stdout.decode('utf-8')
 
